@@ -1,4 +1,4 @@
-app = "mastodon-redis"
+app = "changelog-social-redis"
 
 [[mounts]]
   source = "mastodon_redis"

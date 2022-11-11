@@ -1,4 +1,4 @@
-## Mastodon on fly.io
+## Changelog's Mastodon on fly.io
 
 [Mastodon](https://github.com/mastodon/mastodon) is a free, open-source social network server based on ActivityPub.
 
@@ -15,8 +15,8 @@ docker-compose.yml: https://github.com/mastodon/mastodon/blob/main/docker-compos
 #### App
 
 ```
-$ fly apps create --region iad --name mastodon
-$ fly scale memory 512 # rails needs more than 256mb
+$ fly apps create --region iad --name changelog-social
+$ fly scale memory 1024 # rails needs more than 256mb
 ```
 
 #### Secrets
@@ -33,8 +33,8 @@ $ docker run --rm -e OTP_SECRET=$OTP_SECRET -e SECRET_KEY_BASE=$SECRET_KEY_BASE 
 Redis is used to store the home/list feeds, along with the sidekiq queue information. The feeds can be regenerated using `tootctl`, so persistence is [not strictly necessary](https://docs.joinmastodon.org/admin/backups/#failure).
 
 ```
-$ fly apps create --region iad --name mastodon-redis
-$ fly volumes create -c fly.redis.toml --region iad mastodon_redis
+$ fly apps create --name changelog-social-redis
+$ fly volumes create -c fly.redis.toml mastodon_redis
 $ fly deploy --config fly.redis.toml --build-target redis-server
 ```
 
@@ -47,7 +47,7 @@ Create that volume below, or remove the `[mounts]` section and uncomment `[env] 
 ##### Option 1: Local volume
 
 ```
-$ fly volumes create --region iad mastodon_uploads
+$ fly volumes create mastodon_uploads
 ```
 
 ##### Option 2: S3, etc
@@ -61,8 +61,8 @@ See [lib/tasks/mastodon.rake](https://github.com/mastodon/mastodon/blob/5ba46952
 #### Postgres database
 
 ```
-$ fly pg create --region iad --name mastodon-pg
-$ fly pg attach --postgres-app mastodon-pg
+$ fly pg create --name changelog-social-pg
+$ fly pg attach changelog-social-pg
 $ fly deploy -c fly.setup.toml # run `rails db:setup`
 ```
 
