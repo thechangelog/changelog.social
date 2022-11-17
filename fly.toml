@@ -8,16 +8,15 @@ kill_timeout = 5
   RAILS_ENV = "production"
   RAILS_LOG_TO_STDOUT = "enabled"
   WEB_CONCURRENCY = "1"
+
   REDIS_HOST = "changelog-social-redis.internal"
   REDIS_PORT = "6379"
-  # S3_ENABLED=true
-  # S3_BUCKET=files.example.com
-  # S3_ALIAS_HOST=files.example.com
 
-[mounts]
-  processes = ["rails"]
-  source = "mastodon_uploads"
-  destination = "/opt/mastodon/public/system"
+  S3_ENABLED = "true"
+  S3_BUCKET = "changelog-social"
+  S3_REGION = "us-east-1"
+  S3_HOSTNAME = "s3.amazonaws.com"
+  S3_ALIAS_HOST = "cdn.changelog.social"
 
 [processes]
   rails = "bundle exec rails s -p 8080"
