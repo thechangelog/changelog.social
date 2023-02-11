@@ -3,5 +3,5 @@ ADD start-redis-server.sh /usr/bin/
 RUN chmod +x /usr/bin/start-redis-server.sh
 CMD ["start-redis-server.sh"]
 
-FROM tootsuite/mastodon:v4.0.2
+FROM tootsuite/mastodon:v4.1.0
 ENTRYPOINT []
