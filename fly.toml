@@ -3,6 +3,10 @@ app = "changelog-social"
 kill_signal = "SIGINT"
 kill_timeout = 5
 
+## Uncomment when upgrading Mastodon
+[deploy]
+  release_command = "bin/rails db:migrate"
+
 [env]
   LOCAL_DOMAIN = "changelog.social"
   RAILS_ENV = "production"

@@ -71,3 +71,9 @@ $ fly deploy -c fly.setup.toml # run `rails db:setup`
 ```
 $ fly deploy
 ```
+
+
+### Upgrade
+
+1.  Update `Dockerfile` with the new version reference
+2.  Run `fly deploy`
