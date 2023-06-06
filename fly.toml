@@ -18,8 +18,7 @@ kill_timeout = 5
 
   S3_ENABLED = "true"
   S3_BUCKET = "changelog-social"
-  S3_REGION = "us-east-1"
-  S3_HOSTNAME = "s3.amazonaws.com"
+  S3_ENDPOINT = "https://acd4d0fe190cbd98417069601607c33a.r2.cloudflarestorage.com/"
   S3_ALIAS_HOST = "cdn.changelog.social"
 
 [processes]
