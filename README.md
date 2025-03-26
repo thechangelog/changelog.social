@@ -22,10 +22,17 @@ $ fly scale memory 1024 # rails needs more than 256mb
 #### Secrets
 
 ```
-$ SECRET_KEY_BASE=$(docker run --rm -it tootsuite/mastodon:latest bin/rake secret)
-$ OTP_SECRET=$(docker run --rm -it tootsuite/mastodon:latest bin/rake secret)
+$ SECRET_KEY_BASE=$(docker run --rm -it tootsuite/mastodon:latest bin/rails secret)
+$ OTP_SECRET=$(docker run --rm -it tootsuite/mastodon:latest bin/rails secret)
 $ fly secrets set OTP_SECRET=$OTP_SECRET SECRET_KEY_BASE=$SECRET_KEY_BASE
+
 $ docker run --rm -e OTP_SECRET=$OTP_SECRET -e SECRET_KEY_BASE=$SECRET_KEY_BASE -it tootsuite/mastodon:latest bin/rake mastodon:webpush:generate_vapid_key | fly secrets import
+
+$ docker run --rm -it tootsuite/mastodon:latest bin/rails db:encryption:init
+
+$ fly secrets set ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=thevalueitgave
+$ fly secrets set ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=thevalueitgave
+$ fly secrets set ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=thevalueitgave
 ```
 
 #### Redis server
